@@ -106,7 +106,7 @@ local function add_mono_player(idx)
         add_ex_params(idx)
     end
 
-    note_players['ex n '..idx] = player
+    note_players['ex macro 2 '..idx] = player
 end
 
 mod.hook.register("script_pre_init", "nb ex pre init", function()
