@@ -7,7 +7,7 @@ end
 
 local function add_ex_params(i)
     local param_offset = 11 * i
-    params:add_group("ex_voice_" .. i, "ex voice " .. i, 9)
+    params:add_group("ex_voice_" .. i, "ex macro voice " .. i + 1, 9)
 
     params:add_number("model_" .. i, "model", 0, 23, 0)
     params:set_action("model_" .. i, function(n)
@@ -93,12 +93,12 @@ local function add_mono_player(idx)
     end
 
     function player:active()
-        params:show("ex_voice_" .. i)
+        params:show("ex_voice_" .. idx)
         _menu.rebuild_params()
     end
 
     function player:inactive()
-        params:hide("ex_voice_" .. i)
+        params:hide("ex_voice_" .. idx)
         _menu.rebuild_params()
     end
 
@@ -106,11 +106,11 @@ local function add_mono_player(idx)
         add_ex_params(idx)
     end
 
-    note_players['ex macro 2 '..idx] = player
+    note_players['ex macro 2 '..idx + 1] = player
 end
 
-mod.hook.register("script_pre_init", "nb ex pre init", function()
-    for n=1,4 do
+mod.hook.register("script_pre_init", "nb ex macro 2 pre init", function()
+    for n=0,3 do
         add_mono_player(n)
     end
 end)
